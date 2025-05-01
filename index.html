@@ -226,7 +226,7 @@
       const apiKey = 'EXPR';
       try {
         const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`
+          `EXPR`
         );
         const data = await response.json();
         document.getElementById('weather').innerText = data.weather[0].main;
