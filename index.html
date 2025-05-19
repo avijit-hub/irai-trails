@@ -1,244 +1,509 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IRAITRAILS - Home</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: url('BG_image_1.jpg') no-repeat center center fixed;
-      background-size: cover;
-      animation: bgFade 10s infinite;
-      transition: background-image 1s ease-in-out;
-      color: #fff;
-    }
-
-    @keyframes bgFade {
-      0% {
-        background-image: url('BG_image_1.jpg');
-      }
-      50% {
-        background-image: url('BG_image_2.jpg');
-      }
-      100% {
-        background-image: url('BG_image_1.jpg');
-      }
-    }
-
-    header {
-      background-color: rgba(182, 180, 180, 0.85);
-      padding: 10px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      flex: 1;
-    }
-
-    .nav-center {
-      flex: 2;
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-    }
-
-    .nav-right {
-      flex: 1;
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    header img {
-      height: 120px;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: white;
-      font-size: 16px;
-      transition: 0.3s;
-      padding: 6px 12px;
-    }
-
-    nav a:hover {
-      color: #000;
-    }
-
-    .book-now {
-      background-color: #ff6b00;
-      border-radius: 4px;
-      font-weight: bold;
-    }
-
-    main {
-      padding: 40px;
-      max-width: 800px;
-    }
-
-    h1 {
-      color: #ff6b00;
-      margin-bottom: 20px;
-    }
-
-    p {
-      font-size: 18px;
-      color: #ffffff;
-      text-align: left;
-    }
-
-    .weather-info {
-      position: fixed;
-      left: 50%;
-      bottom: 40px;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 15px;
-      background-color: rgba(0, 0, 0, 0); /* Transparent background */
-      backdrop-filter: blur(4px); /* Optional: glass effect */
-      color: rgb(0, 0, 0);
-      font-size: 16px;
-      padding: 10px 18px;
-      border-radius: 10px;
-      z-index: 1000;
-      font-family: Arial, sans-serif;
-    }
-
-
-    .weather-info .block {
-      text-align: center;
-    }
-
-    .weather-info .divider {
-      margin: 0 8px;
-      color: rgb(0, 0, 0);
-    }
-
-    strong {
-      font-weight: bold;
-      display: block;
-      font-size: 16px;
-      margin-top: 4px;
-    }
-
-    /* WhatsApp Floating Button */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 100px;
-      right: 20px;
-      z-index: 1000;
-    }
-
-    .whatsapp-float a {
-      display: block;
-      width: 60px;
-      height: 60px;
-
-      color: white;
-      border-radius: 50%;
-      text-align: center;
-      font-size: 30px;
-      line-height: 60px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-      text-decoration: none;
-    }
-
-    .whatsapp-float a:hover {
-      background-color: #1ebe5d;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRAITRAILS - Resort</title>
+    <meta name="description" content="IRAITRAILS offers a serene resort experience in Kondegaon Mal, Chandrapur, near Tadoba Andhari Tiger Reserve. Book your stay for a nature-inspired getaway.">
+    <meta name="keywords" content="IRAITRAILS, Tadoba resort, Chandrapur, wildlife, nature, safari, Kondegaon Mal">
+    <link rel="icon" type="image/x-icon" href="Icon/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        h1, h2 {
+            font-family: 'Crimson Text', serif;
+            font-weight: 700;
+        }
+        .slideshow-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .slide.active {
+            display: block;
+            animation: fade 1s ease-in-out;
+        }
+        @keyframes fade {
+            from { opacity: 0.4 }
+            to { opacity: 1 }
+        }
+        .navbar {
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .navbar .container {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            align-items: center;
+        }
+        .content-overlay {
+            position: absolute;
+            bottom: 250px;
+            left: 120px;
+            transform: none;
+            color: black;
+            text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.8);
+            z-index: 10;
+            width: 90%;
+            max-width: 600px;
+        }
+        .content-overlay h2 {
+            text-align: left;
+            font-weight: 700;
+        }
+        .content-overlay p {
+            text-align: justify;
+            font-weight: 400;
+        }
+        .welcome-overlay {
+            top: 60%;
+            left: 120px;
+            transform: translateY(-50%);
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            z-index: 10;
+            width: 90%;
+            max-width: 600px;
+        }
+        .welcome-overlay h1 {
+            text-align: left;
+            font-weight: 700;
+        }
+        .welcome-overlay p {
+            text-align: justify;
+            font-weight: 400;
+        }
+        .weather-info {
+            position: absolute;
+            left: 50%;
+            bottom: 40px;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            color: rgb(211, 192, 85);
+            font-size: 16px;
+            padding: 10px 18px;
+            border-radius: 10px;
+            z-index: 10;
+            font-family: 'Poppins', sans-serif;
+        }
+        .weather-info .block {
+            text-align: center;
+        }
+        .weather-info .divider {
+            margin: 0 8px;
+            color: rgb(211, 192, 85);
+        }
+        strong {
+            font-weight: bold;
+            display: block;
+            font-size: 16px;
+            margin-top: 4px;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 2px 0;
+            transition: all 0.3s ease;
+        }
+        .nav-links {
+            display: flex;
+            font-weight: 500;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .logo-img {
+            height: 110px; /* Custom desktop logo height */
+            width: auto;
+        }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.9);
+                padding: 1rem;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .content-overlay {
+                bottom: 250px;
+                left: 20px;
+                width: 95%;
+                max-width: none;
+            }
+            .content-overlay h2 {
+                text-align: left;
+                font-size: 2.5rem;
+                font-weight: 700;
+            }
+            .content-overlay p {
+                text-align: justify;
+                font-size: 1rem;
+                font-weight: 400;
+            }
+            .welcome-overlay {
+                top: 60%;
+                left: 20px;
+                transform: translateY(-50%);
+                width: 95%;
+                max-width: none;
+            }
+            .welcome-overlay h1 {
+                text-align: left;
+                font-size: 2.5rem;
+                font-weight: 700;
+            }
+            .welcome-overlay p {
+                text-align: justify;
+                font-size: 1rem;
+                font-weight: 400;
+            }
+            .weather-info {
+                bottom: 10px;
+                width: 90%;
+                padding: 0.5rem 1rem;
+            }
+            .weather-info strong {
+                font-size: 14px;
+            }
+            .social-icons {
+                top: auto;
+                bottom: 20px;
+                right: 20px;
+                transform: none;
+                flex-direction: row;
+                gap: 1rem;
+            }
+            .social-icons a {
+                width: 40px;
+                height: 40px;
+            }
+            .social-icons svg {
+                width: 20px;
+                height: 20px;
+            }
+            .logo-img {
+                height: 48px; /* Custom mobile logo height */
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="logo_tp.png" alt="IRAITRAILS Logo" />
-    </div>
-    <nav class="nav-center">
-      <a href="#home">HOME</a>
-      <a href="#rooms">ROOMS</a>
-      <a href="#lounge">LOUNGE</a>
-      <a href="#tours">TOURS</a>
-      <a href="#gallery">GALLERY</a>
+    <!-- Navigation Menu -->
+    <nav class="navbar fixed top-0 w-full bg-transparent text-white z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#home">
+                <img src="Icon/Main_LogoSVG.svg" alt="Iraitrails Logo" class="logo-img">
+            </a>
+            <div class="hamburger" role="button" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links space-x-4 md:space-x-6">
+                <a href="index.html" class="hover:text-yellow-400 block py-2 md:py-0">HOME</a>
+                <a href="#rooms" class="hover:text-yellow-400 block py-2 md:py-0">ROOMS</a>
+                <a href="#lounge" class="hover:text-yellow-400 block py-2 md:py-0">LOUNGE</a>
+                <a href="#tours" class="hover:text-yellow-400 block py-2 md:py-0">TOURS</a>
+                <a href="#gallery" class="hover:text-yellow-400 block py-2 md:py-0">GALLERY</a>
+                <a href="#book" class="bg-yellow-500 text-black px-4 py-2 rounded hover:bg-yellow-600 block py-2 md:py-0">BOOK NOW</a>
+            </div>
+        </div>
     </nav>
-    <nav class="nav-right">
-      <a href="#book" class="book-now">BOOK NOW</a>
-    </nav>
-  </header>
 
-  <main>
-    <h1>Welcome to RESORT IRAI TRAILS</h1>
-    <p>
-      Nestled in the serene wilderness of Tadoba, IRAI TRAILS offers you a tranquil escape at Kondegaon Mal, Bhadravati, Chandrapur. Surrounded by the rich biodiversity of Tadoba Andhari Tiger Reserve, our resort is the perfect gateway to reconnect with nature, experience the thrill of wildlife, and enjoy warm hospitality.
-    </p>
-  </main>
+    <!-- Section 1: Welcome Message with Full-Screen Slideshow -->
+    <section id="home" class="relative h-screen">
+        <div class="slideshow-container">
+            <img class="slide active" 
+                 srcset="Images-960x540/960x540-welcome1.webp 960w, Images-1920x1080/1920x1080-welcome1.webp 1920w" 
+                 sizes="100vw" 
+                 src="Images-1920x1080/1920x1080-welcome1.webp" 
+                 alt="Welcome Image 1" 
+                 loading="eager">
+            <img class="slide" 
+                 srcset="Images-960x540/960x540-welcome2.webp 960w, Images-1920x1080/1920x1080-welcome2.webp 1920w" 
+                 sizes="100vw" 
+                 src="Images-1920x1080/1920x1080-welcome2.webp" 
+                 alt="Welcome Image 2" 
+                 loading="lazy">
+            <img class="slide" 
+                 srcset="Images-960x540/960x540-welcome3.webp 960w, Images-1920x1080/1920x1080-welcome3.webp 1920w" 
+                 sizes="100vw" 
+                 src="Images-1920x1080/1920x1080-welcome3.webp" 
+                 alt="Welcome Image 3" 
+                 loading="lazy">
+            <img class="slide" 
+                 srcset="Images-960x540/960x540-welcome4.webp 960w, Images-1920x1080/1920x1080-welcome4.webp 1920w" 
+                 sizes="100vw" 
+                 src="Images-1920x1080/1920x1080-welcome4.webp" 
+                 alt="Welcome Image 4" 
+                 loading="lazy">
+            <img class="slide" 
+                 srcset="Images-960x540/960x540-welcome5.webp 960w, Images-1920x1080/1920x1080-welcome5.webp 1920w" 
+                 sizes="100vw" 
+                 src="Images-1920x1080/1920x1080-welcome5.webp" 
+                 alt="Welcome Image 5" 
+                 loading="lazy">
+        </div>
+        <div class="content-overlay welcome-overlay">
+            <h1 class="text-4xl md:text-3xl font-bold mb-4">WELCOME TO IRAITRAILS</h1>
+            <p class="text-lg md:text-xl mb-8">Nestled in the serene wilderness of Tadoba, IRAI TRAILS offers you a tranquil escape at Kondegaon Mal, Bhadravati, Chandrapur. Surrounded by the rich biodiversity of Tadoba Andhari Tiger Reserve, our resort is the perfect gateway to reconnect with nature, experience the thrill of wildlife, and enjoy warm hospitality.</p>
+        </div>
+        <div class="weather-info">
+            <div class="block">
+                <div>Date</div>
+                <strong id="date">--</strong>
+            </div>
+            <div class="divider">|</div>
+            <div class="block">
+                <div>Time</div>
+                <strong id="time">--</strong>
+            </div>
+            <div class="divider">|</div>
+            <div class="block">
+                <div>Weather</div>
+                <strong id="weather">--</strong>
+            </div>
+            <div class="divider">|</div>
+            <div class="block">
+                <div>Temp</div>
+                <strong id="temp">--</strong>
+            </div>
+        </div>
+    </section>
 
-  <div class="weather-info">
-    <div class="block">
-      <div>Date</div>
-      <strong id="date">--</strong>
+    <!-- Section 2: About IRAITRAILS with Full-Screen Slideshow -->
+    <section id="about" class="relative h-screen">
+        <div class="slideshow-container">
+            <img class="slide active" 
+                 srcset="Images-960x540/960x540-About1.webp 960w, Images-1920x1080/1920x1080-About1.webp 1920w" 
+                 sizes="100vw" 
+                 src="Images-1920x1080/1920x1080-About1.webp" 
+                 alt="About Image 1" 
+                 loading="lazy">
+            <img class="slide" 
+                 srcset="Images-960x540/960x540-About2.webp 960w, Images-1920x1080/1920x1080-About2.webp 1920w" 
+                 sizes="100vw" 
+                 src="Images-1920x1080/1920x1080-About2.webp" 
+                 alt="About Image 2" 
+                 loading="lazy">
+            <img class="slide" 
+                 srcset="Images-960x540/960x540-About3.webp 960w, Images-1920x1080/1920x1080-About3.webp 1920w" 
+                 sizes="100vw" 
+                 src="Images-1920x1080/1920x1080-About3.webp" 
+                 alt="About Image 3" 
+                 loading="lazy">
+            <img class="slide" 
+                 srcset="Images-960x540/960x540-About4.webp 960w, Images-1920x1080/1920x1080-About4.webp 1920w" 
+                 sizes="100vw" 
+                 src="Images-1920x1080/1920x1080-About4.webp" 
+                 alt="About Image 4" 
+                 loading="lazy">
+            <img class="slide" 
+                 srcset="Images-960x540/960x540-About5.webp 960w, Images-1920x1080/1920x1080-About5.webp 1920w" 
+                 sizes="100vw" 
+                 src="Images-1920x1080/1920x1080-About5.webp" 
+                 alt="About Image 5" 
+                 loading="lazy">
+        </div>
+        <div class="content-overlay">
+            <h2 class="text-4xl md:text-3xl font-bold mb-4">ABOUT IRAITRAILS</h2>
+            <p class="text-lg md:text-xl">Whether you’re planning a thrilling safari expedition to the famous Tadoba Andhari Tiger Reserve or simply want to relax in nature’s lap, Irai Trails offers the perfect blend of rustic charm and modern amenities. Guests can unwind in the swimming pool, enjoy evenings at the bar counter, and make use of fully equipped kitchen facilities for a personalized culinary experience. On request, the homestay also provides catering services tailored to guest preferences.
+
+Surrounded by dense forest and the soothing flow of the river, Irai Trails offers not just accommodation—but an immersive nature experience. Wake up to the call of birds, enjoy a cup of tea with a jungle view, and explore the untamed beauty of Tadoba just minutes away.</p>
+        </div>
+    </section>
+
+    <!-- Section 3: Location Map and Contact Details -->
+    <section id="contact" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-3xl font-bold text-center mb-8">LOCATION</h2>
+            <div class="flex flex-col md:flex-row gap-8">
+                <!-- Google Map -->
+                <div class="w-full md:w-1/2">
+                    <iframe class="w-full h-96 rounded" 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d467.9580484155762!2d79.30860988406623!3d20.231262674428837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd333005c78726f%3A0xcbfcf8681567fb00!2sIraltel%20Resort!5e0!3m2!1sen!2sin!4v1747216709067!5m2!1sen!2sin" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <!-- Contact Details -->
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-2xl md:text-2xl font-bold mb-4">FOR RESERVATIONS</h3>
+                    <p class="mb-2 text-base md:text-lg"><strong>Address:</strong> Kondegaon Mal, Bhadravati, Chandrapur, PIN 442906, Maharashtra, India.</p>
+                    <p class="mb-2 text-base md:text-lg"><strong>Phone:</strong> +91 97487 47410</p>
+                    <p class="mb-2 text-base md:text-lg"><strong>Email:</strong> contact@iraitrails.in</p>
+                    <p class="mb-2 text-base md:text-lg"><strong>Hours:</strong> Open 24/7 for bookings and inquiries</p>
+                    <div class="mt-4">
+                        <a href="#book" class="bg-yellow-500 text-black px-6 py-3 rounded hover:bg-yellow-600 text-base md:text-lg">Book Your Stay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-base md:text-lg">© 2025 IRAITRAILS - RESORT. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Social Media Icons -->
+    <div class="social-icons fixed top-1/2 right-4 transform -translate-y-1/2 flex flex-col gap-4 z-50">
+        <a href="https://api.whatsapp.com/send/?phone=919433053413&text&app_absent=0" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-green-600 hover:scale-110 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
+                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.137.557 4.242 1.615 6.103L0 24l5.977-1.576A11.985 11.985 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm6.153 17.316c-.285.804-1.65 1.547-2.307 1.632-.656.085-1.598.02-3.094-.615-2.55-.99-4.697-3.316-5.142-3.804-.445-.488-.896-1.082-1.335-1.885-.44-.803-.51-1.487-.285-2.013.225-.526.555-.656 1.05-.803.495-.147.735-.05 1.05.315.315.365.765 1.335 1.05 1.83.285.495.375.735.075 1.05-.3.315-.45.495-.675.735-.225.24-.465.495-.135.99.33.495 1.47 2.085 3.135 2.865 1.665.78 2.175.615 2.91.315.735-.3 1.455-1.155 1.83-1.905.375-.75.315-1.395.135-1.695-.18-.3-.675-.465-1.05-.645-.375-.18-.735-.315-.96-.495-.225-.18-.465-.375-.75-.315-.285.06-.645.315-1.05.645-.405.33-.765.705-.96.945-.195.24-.405.315-.675.195-.27-.12-1.155-.465-2.145-1.47-1.665-1.65-1.83-2.895-.645-3.315.315-.135.735-.225 1.155-.315.42-.09.735-.045 1.05.315.315.36.675 1.155 1.05 1.83.375.675.465.735.75.495.285-.24.615-.645 1.05-1.05.435-.405.735-.735.96-1.05.225-.315.315-.705.135-1.05-.18-.345-.645-.705-1.05-.945-.405-.24-.735-.285-1.05-.135zm0 0"/>
+            </svg>
+        </a>
+        <a href="https://instagram.com/iraitrails" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="bg-pink-500 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-pink-600 hover:scale-110 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.332 3.608 1.307.975.975 1.245 2.242 1.307 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.332 2.633-1.307 3.608-.975.975-2.242 1.245-3.608 1.307-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.332-3.608-1.307-.975-.975-1.245-2.242-1.307-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.332-2.633 1.307-3.608.975-.975 2.242-1.245 3.608-1.307 1.266-.058 1.646-.07 4.85-.07M12 0C8.741 0 8.332.014 7.052.072 5.77.13 4.607.398 3.584 1.416 2.561 2.434 2.293 3.597 2.235 4.879 2.177 6.159 2.163 6.568 2.163 9.827s.014 3.668.072 4.948c.058 1.282.326 2.445 1.344 3.468 1.018 1.023 2.181 1.291 3.463 1.349 1.28.058 1.689.072 4.948.072s3.668-.014 4.948-.072c1.282-.058 2.445-.326 3.468-1.344 1.023-1.018 1.291-2.181 1.349-3.463.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.058-1.282-.326-2.445-1.344-3.468C20.445.398 19.282.13 18 .072 16.72.014 16.311 0 13.052 0H12zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
+            </svg>
+        </a>
+        <a href="https://facebook.com/iraitrails" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-blue-600 hover:scale-110 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+        </a>
+        <a href="https://youtube.com/iraitrails" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="bg-red-500 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-red-600 hover:scale-110 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
+                <path d="M23.498 6.186a2.984 2.984 0 00-2.1-2.103C19.576 3.5 12 3.5 12 3.5s-7.576 0-9.398.583a2.984 2.984 0 00-2.1 2.103C0 8.008 0 12 0 12s0 3.992.502 5.814a2.984 2.984 0 002.1 2.103C4.424 20.5 12 20.5 12 20.5s7.576 0 9.398-.583a2.984 2.984 0 002.1-2.103C24 15.992 24 12 24 12s0-3.992-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+        </a>
     </div>
-    <div class="divider">|</div>
-    <div class="block">
-      <div>Time</div>
-      <strong id="time">--</strong>
-    </div>
-    <div class="divider">|</div>
-    <div class="block">
-      <div>Weather</div>
-      <strong id="weather">--</strong>
-    </div>
-    <div class="divider">|</div>
-    <div class="block">
-      <div>Temp</div>
-      <strong id="temp">--</strong>
-    </div>
-  </div>
 
-  <!-- WhatsApp Floating Button -->
-  <div class="whatsapp-float">
-    <a href="https://api.whatsapp.com/send/?phone=919433053413&text&app_absent=0" target="_blank" title="Chat on WhatsApp">
-      <img src="WhatsApp_icon.png" alt="WhatsApp" width="60" height="60" style="border-radius: 50%; box-shadow: 0 2px 10px rgba(0,0,0,0.3);" />
-    </a>
-  </div>
+    <!-- JavaScript for Slideshow, Navbar Scroll Effect, Hamburger Menu, and Weather Widget -->
+    <script>
+        // Slideshow functionality
+        function initSlideshows() {
+            const slideshows = document.querySelectorAll('.slideshow-container');
+            slideshows.forEach(slideshow => {
+                const slides = slideshow.querySelectorAll('.slide');
+                let currentSlide = 0;
 
-  <script>
-    function updateDateTime() {
-      const now = new Date();
-      document.getElementById('date').innerText = now.toLocaleDateString('en-IN', {
-        year: 'numeric', month: 'long', day: 'numeric'
-      });
-      document.getElementById('time').innerText = now.toLocaleTimeString('en-IN');
-    }
-    setInterval(updateDateTime, 1000);
-    updateDateTime();
+                function showSlide(index) {
+                    slides.forEach((slide, i) => {
+                        slide.classList.toggle('active', i === index);
+                    });
+                }
 
-    async function fetchWeather() {
-      const lat = 20.1107;  // Bhadravati
-      const lon = 79.1212;
-      const apiKey = 'EXPR';
-      try {
-        const response = await fetch(
-          `EXPR`
-        );
-        const data = await response.json();
-        document.getElementById('weather').innerText = data.weather[0].main;
-        document.getElementById('temp').innerText = Math.round(data.main.temp) + "°C";
-      } catch (error) {
-        document.getElementById('weather').innerText = 'N/A';
-        document.getElementById('temp').innerText = '--';
-      }
-    }
+                function nextSlide() {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    showSlide(currentSlide);
+                }
 
-    fetchWeather();
-    setInterval(fetchWeather, 600000); // every 10 min
-  </script>
+                showSlide(currentSlide);
+                setInterval(nextSlide, 3000);
+            });
+        }
+
+        // Navbar scroll effect
+        function initNavbarScroll() {
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Hamburger menu toggle
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const hamburger = document.querySelector('.hamburger');
+            const isActive = navLinks.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', isActive);
+        }
+
+        // Date and Time functionality
+        function updateDateTime() {
+            const now = new Date();
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = now.toLocaleString('en-US', { month: 'short' }).toUpperCase();
+            const year = now.getFullYear();
+            document.getElementById('date').textContent = `${day} ${month} ${year}`;
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const period = hours >= 12 ? 'pm' : 'am';
+            hours = hours % 12 || 12;
+            document.getElementById('time').textContent = `${hours}:${minutes}:${seconds} ${period}`;
+        }
+
+        // Weather API functionality
+        async function fetchWeather() {
+            document.getElementById('weather').textContent = 'Loading...';
+            document.getElementById('temp').textContent = '--°C';
+            const apiKey = '8ae374a1e7f5f124da5870bc88c283f8';
+            const lat = 20.2313;
+            const lon = 79.3086;
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Weather API request failed');
+                }
+                const data = await response.json();
+                const weatherDescription = data.weather[0].description
+                    .split(' ')
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(' ');
+                document.getElementById('weather').textContent = weatherDescription;
+                const temperature = Math.round(data.main.temp);
+                document.getElementById('temp').textContent = `${temperature}°C`;
+            } catch (error) {
+                console.error('Error fetching weather:', error);
+                document.getElementById('weather').textContent = 'Temporarily Unavailable';
+                document.getElementById('temp').textContent = '--°C';
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initSlideshows();
+            initNavbarScroll();
+            updateDateTime();
+            fetchWeather();
+            setInterval(updateDateTime, 1000);
+            setInterval(fetchWeather, 600000);
+            document.querySelector('.hamburger').addEventListener('click', toggleMenu);
+        });
+    </script>
 </body>
 </html>
